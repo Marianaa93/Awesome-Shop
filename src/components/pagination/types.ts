@@ -1,5 +1,5 @@
 export type PaginationProps = {
-  totalItems: number;
-  itemsPerPage: number;
+  currentPage: number;
+  totalPages: number;
   onPageChange: (page: number) => void;
 };
