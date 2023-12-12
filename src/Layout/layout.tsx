@@ -7,6 +7,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
       display='Flex'
       flexDirection='column'
       w='100%'
+      boxSizing='border-box'
       minHeight='100vh'
     >
       {children}

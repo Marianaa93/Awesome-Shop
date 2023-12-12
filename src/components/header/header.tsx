@@ -1,4 +1,4 @@
-import { Box, Image, Text } from "@chakra-ui/react";
+import { Box, Image } from "@chakra-ui/react";
 import { DrawerComponent } from "../drawer/drawer";
 import logo from "../../assets/logo.png";
 
@@ -17,7 +17,7 @@ export function Header() {
       <Image
         src={logo}
         height='50px'
-        alt='A Placeholder Image'
+        alt='Awesome store logo'
       />
       <DrawerComponent />
     </Box>
