@@ -1,5 +1,6 @@
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Image, Text } from "@chakra-ui/react";
 import { DrawerComponent } from "../drawer/drawer";
+import logo from "../../assets/logo.png";
 
 export function Header() {
   return (
@@ -13,12 +14,11 @@ export function Header() {
       padding='0 24px'
       height='64px'
     >
-      <Text
-        fontWeight='bold'
-        color=''
-      >
-        Awesome Shop
-      </Text>
+      <Image
+        src={logo}
+        height='50px'
+        alt='A Placeholder Image'
+      />
       <DrawerComponent />
     </Box>
   );
