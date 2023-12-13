@@ -26,11 +26,15 @@ export function DrawerComponent() {
   return (
     <>
       <IconButton
-        colorScheme='teal'
         aria-label={""}
+        variant='ghost'
+        backgroundColor='none'
+        outline={0}
+        _hover={{ transform: "scale(1.5)", background: "none" }}
+        _active={{ background: "none" }}
         onClick={onOpen}
       >
-        <ShoppingCart />
+        <ShoppingCart size='40px' />
       </IconButton>
       <Drawer
         size='md'
