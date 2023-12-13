@@ -80,16 +80,17 @@ export function ProductCard({ name, src, category, price }: Props) {
             objectFit='cover'
             position='absolute'
             left='-2.5%'
+            boxShadow={"md"}
           />
 
           <Box
             position='absolute'
             top='0'
             left='0'
-            right='20px'
+            right='30px'
             bottom='0'
             borderRadius='md'
-            background='linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.5))' // Gradiente simulando sombra
+            background='linear-gradient(rgba(0.2,0.2,0,0.2 ), rgba(0.1,0,0.1,0.2))'
             zIndex={2}
           />
         </Stack>
