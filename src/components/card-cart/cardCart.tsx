@@ -3,8 +3,10 @@ import { randomNumber } from "../product-card/product-card";
 import { NumberInput } from "../../UI/number-input";
 import { Trash } from "@phosphor-icons/react";
 import { CartItemsProps } from "../../contexts/ProductContextProps";
+import { useProductContext } from "../../contexts/ProductContext";
 
 export function CardCart({ name, price, id }: CartItemsProps) {
+  const { removeFromCart } = useProductContext();
   return (
     <Flex
       boxShadow='lg'
@@ -57,11 +59,11 @@ export function CardCart({ name, price, id }: CartItemsProps) {
         >
           <NumberInput />
           <IconButton
+            onClick={() => removeFromCart(id)}
             colorScheme='red'
             mr='20px'
             background='none'
             aria-label='Trash Icon'
-            onClick={() => {}}
             _hover={{ transform: "scale(1.5)" }}
             _active={{ background: "none" }}
           >

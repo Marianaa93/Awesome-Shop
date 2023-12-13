@@ -12,6 +12,7 @@ export type ProductContextProps = {
   products: ProductProps[];
   cartItems: CartItemsProps[];
   addToCart: (productCart: CartItemsProps) => void;
+  removeFromCart: (id: number) => void;
 };
 export type CartItemsProps = {
   id: number;
