@@ -14,7 +14,7 @@ import {
   CardHeader,
 } from "@chakra-ui/react";
 import { Props } from "./types";
-const randomNumber = Math.floor(Math.random() * 1000);
+export const randomNumber = Math.floor(Math.random() * 1000);
 
 export function ProductCard({ name, src, category, price }: Props) {
   const getCategoryColor = (category: string) => {
