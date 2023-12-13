@@ -1,17 +1,19 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { ProductProps, ProductContextProps } from "./ProductContextProps";
+import {
+  ProductProps,
+  ProductContextProps,
+  CartItemsProps,
+} from "./ProductContextProps";
 
 const ProductContext = createContext<ProductContextProps>({
   products: [],
-  selectedProduct: null,
-  setSelectedProduct: () => {},
+  cartItems: [],
+  addToCart: () => {},
 });
 
 export function ProductProvider({ children }: React.PropsWithChildren<{}>) {
   const [products, setProducts] = useState<ProductProps[]>([]);
-  const [selectedProduct, setSelectedProduct] = useState<ProductProps | null>(
-    null
-  );
+  const [cartItems, setCartItems] = useState<CartItemsProps[]>([]);
 
   const fetchProducts = async () => {
     try {
@@ -25,14 +27,17 @@ export function ProductProvider({ children }: React.PropsWithChildren<{}>) {
     }
   };
 
+  const addToCart = (productCart: CartItemsProps) => {
+    setCartItems([...cartItems, productCart]);
+    // setTotal(total + product.price);
+  };
+
   useEffect(() => {
     fetchProducts();
   }, []);
 
   return (
-    <ProductContext.Provider
-      value={{ products, selectedProduct, setSelectedProduct }}
-    >
+    <ProductContext.Provider value={{ products, cartItems, addToCart }}>
       {children}
     </ProductContext.Provider>
   );

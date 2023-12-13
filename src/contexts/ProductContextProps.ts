@@ -10,6 +10,11 @@ export type ProductProps = {
 
 export type ProductContextProps = {
   products: ProductProps[];
-  selectedProduct: ProductProps | null;
-  setSelectedProduct: React.Dispatch<React.SetStateAction<ProductProps | null>>;
+  cartItems: CartItemsProps[];
+  addToCart: (productCart: CartItemsProps) => void;
+};
+export type CartItemsProps = {
+  id: number;
+  name: string;
+  price: number;
 };

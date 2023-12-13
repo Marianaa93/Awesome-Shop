@@ -15,13 +15,14 @@ import {
   IconButton,
   Divider,
 } from "@chakra-ui/react";
-import { ShoppingCart, ShoppingCartSimple } from "@phosphor-icons/react";
+import { ShoppingCart } from "@phosphor-icons/react";
 import React from "react";
 import { CardCart } from "../card-cart";
+import { useProductContext } from "../../contexts/ProductContext";
 
 export function DrawerComponent() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const firstField = React.useRef();
+  const { cartItems } = useProductContext();
 
   return (
     <>
@@ -40,7 +41,6 @@ export function DrawerComponent() {
         size='md'
         isOpen={isOpen}
         placement='right'
-        // initialFocusRef={firstField}
         onClose={onClose}
       >
         <DrawerOverlay />
@@ -62,9 +62,14 @@ export function DrawerComponent() {
                   Summary
                 </Text>
               </Box>
-              <Box>
-                <CardCart />
-              </Box>
+              {cartItems.map((cartItem) => (
+                <CardCart
+                  key={cartItem.id}
+                  name={cartItem.name}
+                  price={cartItem.price}
+                  id={cartItem.id}
+                />
+              ))}
             </Stack>
             <Divider />
             <Text

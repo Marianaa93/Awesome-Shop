@@ -1,9 +1,10 @@
 import { Box, Flex, Stack, Image, Text, IconButton } from "@chakra-ui/react";
 import { randomNumber } from "../product-card/product-card";
 import { NumberInput } from "../../UI/number-input";
-import { Trash, TrashSimple } from "@phosphor-icons/react";
+import { Trash } from "@phosphor-icons/react";
+import { CartItemsProps } from "../../contexts/ProductContextProps";
 
-export function CardCart() {
+export function CardCart({ name, price, id }: CartItemsProps) {
   return (
     <Flex
       boxShadow='lg'
@@ -19,8 +20,9 @@ export function CardCart() {
         position='relative'
       >
         <Image
-          src={`https://source.unsplash.com/800x600/?book
-            )}&random=${randomNumber}`}
+          src={`https://source.unsplash.com/800x600/?${encodeURIComponent(
+            name
+          )}&random=${randomNumber}`}
           alt={`book's cover`}
           w='70px'
           h='95%'
@@ -48,7 +50,7 @@ export function CardCart() {
         flex={1}
         gap={2}
       >
-        <Text>Product Name</Text> <Text>Price</Text>
+        <Text>{name}</Text> <Text>${price}</Text>
         <Flex
           flexDir='row'
           justifyContent='space-between'
