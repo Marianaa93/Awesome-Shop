@@ -25,15 +25,13 @@ export function Home() {
   }, []);
 
   return (
-    <Flex flexDir='column'>
+    <div>
       <Header />
 
       <Box
         as='main'
-        height='100px'
-        padding='0 100px'
         marginTop='36px'
-        marginBottom='200px'
+        marginBottom='0'
         display='flex'
         flexDirection='column'
         alignContent='center'
@@ -44,23 +42,29 @@ export function Home() {
           padding='10px'
           gap={2}
           border='0.5px solid #CDC5D9'
-          width='100%' // Defina a largura para ocupar 100% do container
-          boxSizing='border-box' // Certifique-se de que a largura inclua padding e borda
+          width='75%'
+          placeSelf='center'
         >
           <Input
-            flex='1' // Faça o Input ocupar todo o espaço disponível
+            flex='11'
             border='1px solid #CDC5D9'
             lineHeight='37px'
             textAlign='left'
           />
           <Select
-            flex='1' // Faça o Select ocupar todo o espaço disponível
+            flex='3'
             border='1px solid #CDC5D9'
             lineHeight='37px'
             textAlign='left'
-          />
+          >
+            <option value=''>Category</option>
+            <option value='fiction'>Fiction</option>
+            <option value='nonFiction'>Non-Fiction</option>
+            <option value='biography'>Biography</option>
+            <option value='scienceFiction'>Science-Fiction</option>
+          </Select>
           <Select
-            flex='1' // Faça o Select ocupar todo o espaço disponível
+            flex='3'
             border='1px solid #CDC5D9'
             lineHeight='37px'
             textAlign='left'
@@ -76,9 +80,11 @@ export function Home() {
         </Flex>
 
         <Grid
-          mt='20px'
-          templateColumns={{ base: "repeat(2, 1fr)", md: "repeat(4, 1fr)" }}
-          gap='25px'
+          mt='48px'
+          justifyItems='center'
+          placeContent={"center"}
+          templateColumns={{ base: "repeat(2, 300px)", md: "repeat(4, 300px)" }}
+          gap='96px'
         >
           {products.map((product) => (
             <ProductCard
@@ -91,6 +97,6 @@ export function Home() {
           ))}
         </Grid>
       </Box>
-    </Flex>
+    </div>
   );
 }

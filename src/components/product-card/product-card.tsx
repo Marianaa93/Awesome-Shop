@@ -37,31 +37,36 @@ export function ProductCard({ name, src, category, price }: Props) {
       display='flex'
       maxW='300px'
       w='300px'
+      h='350px'
+      boxShadow='md'
       justifyContent='center'
     >
-      <div>
-        <CardHeader
-          textAlign='center'
-          fontWeight='semibold'
-          fontSize='18px'
-        >
-          {name}
-        </CardHeader>
-        <Badge
-          fontSize='0.8em'
-          w='fit-content '
-          colorScheme={getCategoryColor(category)}
-        >
-          {category}
-        </Badge>
-      </div>
+      <CardHeader
+        textAlign='center'
+        fontWeight='semibold'
+        fontSize='18px'
+      >
+        {name}
+      </CardHeader>
+      <Badge
+        fontSize='0.8em'
+        w='fit-content '
+        colorScheme={getCategoryColor(category)}
+      >
+        {category}
+      </Badge>
 
-      <CardBody alignSelf='center'>
+      <CardBody
+        w='100%'
+        backgroundColor='#F4F6F6'
+      >
         <Stack
+          display='flex'
           boxSize={{ base: "80px", md: "150px" }}
           borderRadius='md'
           overflow='hidden'
           position='relative'
+          ml='25%'
         >
           <Image
             src={`https://source.unsplash.com/800x600/?${encodeURIComponent(
@@ -75,17 +80,6 @@ export function ProductCard({ name, src, category, price }: Props) {
             objectFit='cover'
             position='absolute'
             left='-2.5%'
-            zIndex={1}
-            justifySelf='center'
-          />
-          <Box
-            position='absolute'
-            top='0'
-            right='0'
-            bottom='0'
-            w='5%'
-            background='linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.8))'
-            zIndex={2}
           />
 
           <Box
@@ -96,7 +90,7 @@ export function ProductCard({ name, src, category, price }: Props) {
             bottom='0'
             borderRadius='md'
             background='linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.5))' // Gradiente simulando sombra
-            zIndex={3}
+            zIndex={2}
           />
         </Stack>
       </CardBody>
