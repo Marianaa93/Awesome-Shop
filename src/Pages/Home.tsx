@@ -3,27 +3,13 @@ import { Header } from "../components/header";
 import { ProductCard } from "../components/product-card/product-card";
 import { useEffect, useState } from "react";
 import { Product } from "./types";
+import { useProductContext } from "../contexts/ProductContext";
 
 const BASE_URL =
   "https://my-json-server.typicode.com/guilhermekuni/fake-products-api";
 
 export function Home() {
-  const [products, setProducts] = useState<Product[]>([]);
-
-  const fetchProducts = async () => {
-    try {
-      const response = await fetch(`${BASE_URL}/products`);
-      const data: Product[] = await response.json();
-      setProducts(data);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
-
-  useEffect(() => {
-    fetchProducts();
-  }, []);
-
+  const { products } = useProductContext();
   return (
     <div>
       <Header />
@@ -92,7 +78,8 @@ export function Home() {
               name={product.name}
               category={product.category}
               price={product.price}
-              src={product.image}
+              image={product.image}
+              id={product.id}
             />
           ))}
         </Grid>
