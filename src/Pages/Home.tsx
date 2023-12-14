@@ -1,18 +1,34 @@
-import { Box, Button, Flex, Grid, Input, Select } from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
+import { Box, Flex, Grid, Input, Select } from "@chakra-ui/react";
 import { Header } from "../components/header";
 import { ProductCard } from "../components/product-card/product-card";
-import { useEffect, useState } from "react";
 import { Product } from "./types";
-import { useCartContext } from "../contexts/CartContext";
 import { api } from "../services/api";
 
 export function Home() {
   const [products, setProducts] = useState<Product[]>([]);
+  const [searchTittle, setSearchTittle] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedPrice, setSelectedPrice] = useState("");
 
   useEffect(() => {
     async function loadProducts() {
       try {
-        const response = await api.get("/products"); // Make sure this is the correct endpoint
+        let queryParams: Record<string, string | undefined> = {};
+
+        if (searchTittle) {
+          queryParams.name_like = searchTittle;
+        }
+
+        if (selectedCategory) {
+          queryParams.category = selectedCategory;
+        }
+
+        if (selectedPrice) {
+          queryParams.price_lte = selectedPrice;
+        }
+
+        const response = await api.get("/products", { params: queryParams });
         const data: Product[] = response.data;
         setProducts(data);
       } catch (error) {
@@ -21,7 +37,7 @@ export function Home() {
     }
 
     loadProducts();
-  }, []);
+  }, [searchTittle, selectedCategory, selectedPrice]);
 
   return (
     <div>
@@ -34,7 +50,7 @@ export function Home() {
         display='flex'
         flexDirection='column'
         alignContent='center'
-        justifySelf={"center"}
+        justifySelf='center'
       >
         <Flex
           boxShadow='md'
@@ -49,45 +65,53 @@ export function Home() {
             border='1px solid #CDC5D9'
             lineHeight='37px'
             textAlign='left'
+            placeholder='Search by name...'
+            value={searchTittle}
+            onChange={(e) => setSearchTittle(e.target.value)}
           />
           <Select
             flex='3'
             border='1px solid #CDC5D9'
             lineHeight='37px'
             textAlign='left'
+            value={selectedCategory}
+            onChange={(e) => setSelectedCategory(e.target.value)}
           >
-            <option value=''>Category</option>
+            <option value=''>All Categories</option>
             <option value='fiction'>Fiction</option>
-            <option value='nonFiction'>Non-Fiction</option>
+            <option value='non-fiction'>Non-Fiction</option>
             <option value='biography'>Biography</option>
-            <option value='scienceFiction'>Science-Fiction</option>
+            <option value='science-fiction'>Science-Fiction</option>
           </Select>
           <Select
             flex='3'
             border='1px solid #CDC5D9'
             lineHeight='37px'
             textAlign='left'
-          />
-          <Button
-            padding='16px 32px'
-            backgroundColor='#111111'
-            color='#ffffff'
-            _hover={{ backgroundColor: "#2a2a2a", opacity: "0.8" }}
+            value={selectedPrice}
+            onChange={(e) => setSelectedPrice(e.target.value)}
           >
-            Search
-          </Button>
+            <option value=''>Select Price Range</option>
+            <option value='100'>$0 - $20</option>
+            <option value='40'>$20 - $40</option>
+            <option value='50'>$40 - $50</option>
+            <option value='60'>$50 +</option>
+          </Select>
         </Flex>
 
         <Grid
           mt='48px'
           justifyItems='center'
-          placeContent={"center"}
-          templateColumns={{ base: "repeat(2, 300px)", md: "repeat(4, 300px)" }}
+          placeContent='center'
+          templateColumns={{
+            base: "repeat(2, 300px)",
+            md: "repeat(4, 300px)",
+          }}
           gap='96px'
         >
-          {products.map((product) => (
+          {products.map((product, index) => (
             <ProductCard
-              key={product.id}
+              key={index}
               name={product.name}
               category={product.category}
               price={product.price}
