@@ -25,7 +25,13 @@ export function Home() {
         }
 
         if (selectedPrice) {
-          queryParams.price_lte = selectedPrice;
+          if (selectedPrice.includes("-")) {
+            const [min, max] = selectedPrice.split("-");
+            queryParams.price_gte = min;
+            queryParams.price_lte = max;
+          } else {
+            queryParams.price_eq = selectedPrice;
+          }
         }
 
         const response = await api.get("/products", { params: queryParams });
@@ -92,10 +98,10 @@ export function Home() {
             onChange={(e) => setSelectedPrice(e.target.value)}
           >
             <option value=''>Select Price Range</option>
-            <option value='100'>$0 - $20</option>
-            <option value='40'>$20 - $40</option>
-            <option value='50'>$40 - $50</option>
-            <option value='60'>$50 +</option>
+            <option value='0-20'>$0 - $20</option>
+            <option value='20-40'>$20 - $40</option>
+            <option value='40-50'>$40 - $50</option>
+            <option value='51-200'>$50 +</option>
           </Select>
         </Flex>
 
