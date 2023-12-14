@@ -2,39 +2,35 @@ import React, { useEffect, useState } from "react";
 import { Box, Flex, Grid, Input, Select } from "@chakra-ui/react";
 import { Header } from "../components/header";
 import { ProductCard } from "../components/product-card/product-card";
+import { Pagination } from "../components/pagination/pagination";
 import { Product } from "./types";
 import { api } from "../services/api";
 
 export function Home() {
   const [products, setProducts] = useState<Product[]>([]);
-  const [searchTittle, setSearchTittle] = useState("");
+  const [searchTitle, setSearchTitle] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedPrice, setSelectedPrice] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const itemsPerPage = 8;
 
   useEffect(() => {
     async function loadProducts() {
       try {
-        let queryParams: Record<string, string | undefined> = {};
-
-        if (searchTittle) {
-          queryParams.name_like = searchTittle;
-        }
-
-        if (selectedCategory) {
-          queryParams.category = selectedCategory;
-        }
-
-        if (selectedPrice) {
-          if (selectedPrice.includes("-")) {
-            const [min, max] = selectedPrice.split("-");
-            queryParams.price_gte = min;
-            queryParams.price_lte = max;
-          } else {
-            queryParams.price_eq = selectedPrice;
-          }
-        }
+        const queryParams: Record<string, string | undefined> = {
+          ...(searchTitle && { name_like: searchTitle }),
+          ...(selectedCategory && { category: selectedCategory }),
+          ...(selectedPrice && { price_lte: selectedPrice }),
+          _page: String(currentPage),
+          _limit: String(itemsPerPage),
+        };
 
         const response = await api.get("/products", { params: queryParams });
+
+        const totalCount = Number(response.headers["x-total-count"]);
+        setTotalPages(Math.ceil(totalCount / itemsPerPage));
+
         const data: Product[] = response.data;
         setProducts(data);
       } catch (error) {
@@ -43,7 +39,11 @@ export function Home() {
     }
 
     loadProducts();
-  }, [searchTittle, selectedCategory, selectedPrice]);
+  }, [searchTitle, selectedCategory, selectedPrice, currentPage]);
+
+  const handlePageChange = (newPage: number) => {
+    setCurrentPage(newPage);
+  };
 
   return (
     <div>
@@ -72,8 +72,8 @@ export function Home() {
             lineHeight='37px'
             textAlign='left'
             placeholder='Search by name...'
-            value={searchTittle}
-            onChange={(e) => setSearchTittle(e.target.value)}
+            value={searchTitle}
+            onChange={(e) => setSearchTitle(e.target.value)}
           />
           <Select
             flex='3'
@@ -98,10 +98,10 @@ export function Home() {
             onChange={(e) => setSelectedPrice(e.target.value)}
           >
             <option value=''>Select Price Range</option>
-            <option value='0-20'>$0 - $20</option>
-            <option value='20-40'>$20 - $40</option>
-            <option value='40-50'>$40 - $50</option>
-            <option value='51-200'>$50 +</option>
+            <option value='20'>$0 - $20</option>
+            <option value='40'>$20 - $40</option>
+            <option value='50'>$40 - $50</option>
+            <option value='60'>$50 +</option>
           </Select>
         </Flex>
 
@@ -127,6 +127,12 @@ export function Home() {
             />
           ))}
         </Grid>
+
+        <Pagination
+          totalPages={totalPages}
+          currentPage={currentPage}
+          onPageChange={handlePageChange}
+        />
       </Box>
     </div>
   );
