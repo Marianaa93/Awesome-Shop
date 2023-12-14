@@ -104,7 +104,11 @@ export function DrawerComponent() {
             flexDir='column'
             justifyContent='space-between'
           >
-            <Stack spacing='24px'>
+            <Stack
+              spacing='24px'
+              maxH='100%'
+              overflowY='auto'
+            >
               <Box>
                 <Text
                   fontSize='lg'
@@ -125,15 +129,16 @@ export function DrawerComponent() {
                 />
               ))}
             </Stack>
-            <Divider />
-            <Text
-              fontSize='20px'
-              fontWeight='500'
-              alignSelf='baseline'
-            >
-              Total:${total.toFixed(2)}
-            </Text>
           </DrawerBody>
+          <Divider />
+          <Text
+            m='10px 0 0 30px'
+            fontSize='20px'
+            fontWeight='500'
+            alignSelf='baseline'
+          >
+            Total:${total.toFixed(2)}
+          </Text>
 
           <DrawerFooter borderTopWidth='1px'>
             <Button
