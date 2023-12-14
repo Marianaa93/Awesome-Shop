@@ -9,7 +9,7 @@ export function Header() {
       justifyContent='space-between'
       alignItems='center'
       backgroundColor='#ffff'
-      boxShadow={"lg"}
+      boxShadow={"sm"}
       width='100%'
       padding='0 24px'
       height='64px'

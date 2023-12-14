@@ -5,9 +5,7 @@ import {
   CardBody,
   CardFooter,
   Button,
-  ButtonGroup,
   Divider,
-  Heading,
   Image,
   Stack,
   Badge,
@@ -20,6 +18,7 @@ export const randomNumber = Math.floor(Math.random() * 1000);
 
 export function ProductCard({ name, id, category, price }: Product) {
   const { addToCart } = useCartContext();
+
   const getCategoryColor = (category: string) => {
     switch (category) {
       case "fiction":
@@ -34,6 +33,7 @@ export function ProductCard({ name, id, category, price }: Product) {
         return "gray";
     }
   };
+
   function handleAddCart(id: number) {
     addToCart(id);
   }
@@ -43,29 +43,35 @@ export function ProductCard({ name, id, category, price }: Product) {
       display='flex'
       maxW='300px'
       w='300px'
-      h='350px'
-      boxShadow='md'
+      maxH='400px'
+      boxShadow='xl'
       justifyContent='center'
+      alignContent='center'
+      border='0.5px solid #CDC5D9'
     >
       <CardHeader
         textAlign='center'
         fontWeight='semibold'
         fontSize='18px'
+        paddingTop='5px 5px 5px 10px'
+        h='100px'
+        display='flex'
+        justifyContent='center'
       >
         {name}
       </CardHeader>
+      <Divider />
       <Badge
+        alignSelf='start'
+        mt='5px'
         fontSize='0.8em'
-        w='fit-content '
+        w='fit-content'
         colorScheme={getCategoryColor(category)}
       >
         {category}
       </Badge>
 
-      <CardBody
-        w='100%'
-        backgroundColor='#F4F6F6'
-      >
+      <CardBody w='100%'>
         <Stack
           display='flex'
           boxSize={{ base: "80px", md: "150px" }}
@@ -80,13 +86,13 @@ export function ProductCard({ name, id, category, price }: Product) {
             )}&random=${randomNumber}`}
             alt={`${name}'s cover`}
             w='120px'
-            h='95%'
+            h='140px'
             borderBottomRightRadius='1px'
             borderColor='#CDC5D9'
             objectFit='cover'
             position='absolute'
-            left='-2.5%'
-            boxShadow={"md"}
+            left='-3%'
+            boxShadow='md'
           />
 
           <Box
@@ -105,6 +111,8 @@ export function ProductCard({ name, id, category, price }: Product) {
       <CardFooter
         display='flex'
         justifyContent='space-between'
+        alignItems='center'
+        h='100px'
       >
         <Text
           textAlign='right'

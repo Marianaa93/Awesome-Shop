@@ -4,12 +4,22 @@ import { randomNumber } from "../product-card/product-card";
 import { Trash } from "@phosphor-icons/react";
 import { useCartContext } from "../../contexts/CartContext";
 import { Product } from "../../types";
+import { UpdateProductAmount } from "../../contexts/CartContextProps";
+import { NumberInput } from "../../UI/number-input";
 
 export function CardCart({ name, price, id, amount }: Product) {
-  const { removeFromCart } = useCartContext();
+  const { removeFromCart, updateProductAmount } = useCartContext();
 
   function handleRemoveProduct(productId: number) {
     removeFromCart(productId);
+  }
+
+  function handleUpdateAmount(newAmount: number) {
+    const updatedProduct: UpdateProductAmount = {
+      productId: id,
+      amount: newAmount,
+    };
+    updateProductAmount(updatedProduct);
   }
   return (
     <Flex
@@ -62,7 +72,11 @@ export function CardCart({ name, price, id, amount }: Product) {
           flexDir='row'
           justifyContent='space-between'
         >
-          {/* <NumberInput /> */}
+          <NumberInput
+            value={amount}
+            onUpdate={handleUpdateAmount}
+            productId={id}
+          />
           <IconButton
             onClick={() => handleRemoveProduct(id)}
             colorScheme='red'

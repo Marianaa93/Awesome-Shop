@@ -1,4 +1,3 @@
-import { AddIcon } from "@chakra-ui/icons";
 import {
   Drawer,
   DrawerBody,
@@ -45,12 +44,11 @@ export function DrawerComponent() {
       amount: cartItem.amount,
     }));
 
-    setPurchaseData({
-      productList,
-      totalPrice: total.toFixed(2),
-    });
+    const totalPrice = total.toFixed(2);
 
-    const jsonString = JSON.stringify(purchaseData);
+    setPurchaseData({ productList, totalPrice });
+
+    const jsonString = JSON.stringify({ productList, totalPrice });
     console.log(jsonString);
     clearCart();
   };
@@ -152,6 +150,7 @@ export function DrawerComponent() {
                 color: "#111111",
                 border: "1px solid #111111",
               }}
+              isDisabled={cart.length === 0}
             >
               Finish Purchase
             </Button>
