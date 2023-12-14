@@ -1,6 +1,5 @@
 import { Box, Flex, Stack, Image, Text, IconButton } from "@chakra-ui/react";
 import { randomNumber } from "../product-card/product-card";
-// import { NumberInput } from "../../UI/number-input";
 import { Trash } from "@phosphor-icons/react";
 import { useCartContext } from "../../contexts/CartContext";
 import { Product } from "../../types";
@@ -67,7 +66,7 @@ export function CardCart({ name, price, id, amount }: Product) {
         gap={2}
       >
         <Text>{name}</Text> <Text>${price}</Text>
-        <Text>Quantidade:{amount}</Text>
+        <Text>Quantity:{amount}</Text>
         <Flex
           flexDir='row'
           justifyContent='space-between'
