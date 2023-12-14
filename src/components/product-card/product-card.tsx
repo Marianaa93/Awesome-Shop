@@ -13,12 +13,13 @@ import {
   Badge,
   CardHeader,
 } from "@chakra-ui/react";
-import { ProductProps } from "../../contexts/ProductContextProps";
-import { useProductContext } from "../../contexts/ProductContext";
+import { Product } from "../../types";
+import { useCartContext } from "../../contexts/CartContext";
+
 export const randomNumber = Math.floor(Math.random() * 1000);
 
-export function ProductCard({ name, id, category, price }: ProductProps) {
-  const { addToCart } = useProductContext();
+export function ProductCard({ name, id, category, price }: Product) {
+  const { addToCart } = useCartContext();
   const getCategoryColor = (category: string) => {
     switch (category) {
       case "fiction":
@@ -33,6 +34,9 @@ export function ProductCard({ name, id, category, price }: ProductProps) {
         return "gray";
     }
   };
+  function handleAddCart(id: number) {
+    addToCart(id);
+  }
 
   return (
     <Card
@@ -119,7 +123,7 @@ export function ProductCard({ name, id, category, price }: ProductProps) {
             color: "#111111",
             border: "1px solid #111111",
           }}
-          onClick={() => addToCart({ id, name, price })}
+          onClick={() => handleAddCart(id)}
         >
           Add to cart
         </Button>

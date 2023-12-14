@@ -1,18 +1,22 @@
 import { Box, Flex, Stack, Image, Text, IconButton } from "@chakra-ui/react";
 import { randomNumber } from "../product-card/product-card";
-import { NumberInput } from "../../UI/number-input";
+// import { NumberInput } from "../../UI/number-input";
 import { Trash } from "@phosphor-icons/react";
-import { CartItemsProps } from "../../contexts/ProductContextProps";
-import { useProductContext } from "../../contexts/ProductContext";
+import { useCartContext } from "../../contexts/CartContext";
+import { Product } from "../../types";
 
-export function CardCart({ name, price, id }: CartItemsProps) {
-  const { removeFromCart } = useProductContext();
+export function CardCart({ name, price, id, amount }: Product) {
+  const { removeFromCart } = useCartContext();
+
+  function handleRemoveProduct(productId: number) {
+    removeFromCart(productId);
+  }
   return (
     <Flex
       boxShadow='lg'
       padding='10px'
       borderRadius='15px'
-      alignItems='center'
+      alignItems='flex-start'
     >
       <Stack
         display='flex'
@@ -53,13 +57,14 @@ export function CardCart({ name, price, id }: CartItemsProps) {
         gap={2}
       >
         <Text>{name}</Text> <Text>${price}</Text>
+        <Text>Quantidade:{amount}</Text>
         <Flex
           flexDir='row'
           justifyContent='space-between'
         >
-          <NumberInput />
+          {/* <NumberInput /> */}
           <IconButton
-            onClick={() => removeFromCart(id)}
+            onClick={() => handleRemoveProduct(id)}
             colorScheme='red'
             mr='20px'
             background='none'

@@ -2,15 +2,15 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { Layout } from "./Layout/layout";
 import { Home } from "./Pages/Home";
 import "./style.css";
-import { ProductProvider } from "./contexts/ProductContext";
+import { CartProvider } from "./contexts/CartContext";
 
 function App() {
   return (
     <ChakraProvider>
       <Layout>
-        <ProductProvider>
+        <CartProvider>
           <Home />
-        </ProductProvider>
+        </CartProvider>
       </Layout>
     </ChakraProvider>
   );

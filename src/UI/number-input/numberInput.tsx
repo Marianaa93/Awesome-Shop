@@ -1,33 +1,40 @@
 import { Button, HStack, Input, useNumberInput } from "@chakra-ui/react";
+import { Product } from "../../types";
+import { useCartContext } from "../../contexts/CartContext";
 
 export function NumberInput() {
-  const { getInputProps, getIncrementButtonProps, getDecrementButtonProps } =
-    useNumberInput({
-      step: 1,
-      defaultValue: 1,
-      min: 1,
-      max: 50,
-      precision: 0,
-    });
+  const { updateProductAmount } = useCartContext();
 
-  const inc = getIncrementButtonProps();
-  const dec = getDecrementButtonProps();
-  const input = getInputProps();
+  function handleIncrease(product: Product) {
+    const IncrementArguments = {
+      productId: product.id,
+      amount: product.amount + 1,
+    };
+    updateProductAmount(IncrementArguments);
+  }
+
+  function handleDecrease(product: Product) {
+    const IncrementArguments = {
+      productId: product.id,
+      amount: product.amount - 1,
+    };
+    updateProductAmount(IncrementArguments);
+  }
 
   return (
     <HStack maxW='150px'>
       <Button
         outline={0}
         background='none'
-        {...dec}
+        // onClick={() => handleDecrease(product)}
       >
         -
       </Button>
-      <Input {...input} />
+      <Input />
       <Button
         outline={0}
         background='none'
-        {...inc}
+        // onClick={() => handleIncrease(product)}
       >
         +
       </Button>

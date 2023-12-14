@@ -3,13 +3,26 @@ import { Header } from "../components/header";
 import { ProductCard } from "../components/product-card/product-card";
 import { useEffect, useState } from "react";
 import { Product } from "./types";
-import { useProductContext } from "../contexts/ProductContext";
-
-const BASE_URL =
-  "https://my-json-server.typicode.com/guilhermekuni/fake-products-api";
+import { useCartContext } from "../contexts/CartContext";
+import { api } from "../services/api";
 
 export function Home() {
-  const { products } = useProductContext();
+  const [products, setProducts] = useState<Product[]>([]);
+
+  useEffect(() => {
+    async function loadProducts() {
+      try {
+        const response = await api.get("/products"); // Make sure this is the correct endpoint
+        const data: Product[] = response.data;
+        setProducts(data);
+      } catch (error) {
+        console.error("Error loading products:", error);
+      }
+    }
+
+    loadProducts();
+  }, []);
+
   return (
     <div>
       <Header />
@@ -80,6 +93,7 @@ export function Home() {
               price={product.price}
               image={product.image}
               id={product.id}
+              amount={product.amount}
             />
           ))}
         </Grid>

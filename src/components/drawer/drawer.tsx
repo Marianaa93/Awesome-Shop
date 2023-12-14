@@ -14,29 +14,52 @@ import {
   useDisclosure,
   IconButton,
   Divider,
+  Badge,
+  Flex,
 } from "@chakra-ui/react";
 import { ShoppingCart } from "@phosphor-icons/react";
 import React from "react";
 import { CardCart } from "../card-cart";
-import { useProductContext } from "../../contexts/ProductContext";
+import { useCartContext } from "../../contexts/CartContext";
 
 export function DrawerComponent() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { cartItems } = useProductContext();
+  const { cart } = useCartContext();
+
+  const total = cart.reduce((sumTotal, product) => {
+    sumTotal += product.price * product.amount;
+    return sumTotal;
+  }, 0);
 
   return (
     <>
-      <IconButton
-        aria-label={""}
-        variant='ghost'
-        backgroundColor='none'
-        outline={0}
-        _hover={{ transform: "scale(1.5)", background: "none" }}
-        _active={{ background: "none" }}
-        onClick={onOpen}
-      >
-        <ShoppingCart size='40px' />
-      </IconButton>
+      <Flex>
+        {" "}
+        <IconButton
+          aria-label={""}
+          variant='ghost'
+          backgroundColor='none'
+          outline={0}
+          _hover={{ opacity: "0.5", background: "none" }}
+          _active={{ background: "none" }}
+          onClick={onOpen}
+          position='relative'
+        >
+          <ShoppingCart size='40px' />
+        </IconButton>
+        {cart.length > 0 && (
+          <Badge
+            position='absolute'
+            borderRadius='50%'
+            w='20px'
+            textAlign='center'
+            background='red'
+            color='#ffff'
+          >
+            {cart.length}
+          </Badge>
+        )}
+      </Flex>
       <Drawer
         size='md'
         isOpen={isOpen}
@@ -62,12 +85,15 @@ export function DrawerComponent() {
                   Summary
                 </Text>
               </Box>
-              {cartItems.map((cartItem) => (
+              {cart.map((cartItem) => (
                 <CardCart
                   key={cartItem.id}
                   name={cartItem.name}
                   price={cartItem.price}
                   id={cartItem.id}
+                  category={""}
+                  image={""}
+                  amount={cartItem.amount}
                 />
               ))}
             </Stack>
@@ -77,7 +103,7 @@ export function DrawerComponent() {
               fontWeight='500'
               alignSelf='baseline'
             >
-              Total: $200
+              Total:${total.toFixed(2)}
             </Text>
           </DrawerBody>
 
