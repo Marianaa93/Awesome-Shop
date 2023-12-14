@@ -1,8 +1,8 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
-import {} from "./CartContext";
+import React, { createContext, useContext, useState } from "react";
 import { CartContextProps, UpdateProductAmount } from "./CartContextProps";
 import { Product } from "../types";
 import { api } from "../services/api";
+
 const CartContext = createContext<CartContextProps>({} as CartContextProps);
 
 export function CartProvider({ children }: React.PropsWithChildren<{}>) {
@@ -30,14 +30,13 @@ export function CartProvider({ children }: React.PropsWithChildren<{}>) {
         return;
       }
     } catch {
-      console.log("somethimg went wrong");
+      console.log("something went wrong");
     }
   };
 
   const removeFromCart = (productId: number) => {
-    // const productExists= cart.some(cartProduct=>cartProduct.id === productId)
-    const filtredCart = cart.filter((cartItem) => cartItem.id !== productId);
-    setCart(filtredCart);
+    const filteredCart = cart.filter((cartItem) => cartItem.id !== productId);
+    setCart(filteredCart);
   };
 
   const updateProductAmount = ({ productId, amount }: UpdateProductAmount) => {
@@ -46,9 +45,20 @@ export function CartProvider({ children }: React.PropsWithChildren<{}>) {
     );
     setCart(updatedCart);
   };
+
+  const clearCart = () => {
+    setCart([]);
+  };
+
   return (
     <CartContext.Provider
-      value={{ cart, addToCart, removeFromCart, updateProductAmount }}
+      value={{
+        cart,
+        addToCart,
+        removeFromCart,
+        updateProductAmount,
+        clearCart,
+      }}
     >
       {children}
     </CartContext.Provider>

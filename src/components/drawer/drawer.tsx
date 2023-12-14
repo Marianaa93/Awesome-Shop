@@ -18,13 +18,14 @@ import {
   Flex,
 } from "@chakra-ui/react";
 import { ShoppingCart } from "@phosphor-icons/react";
-import React from "react";
+import React, { useState } from "react";
 import { CardCart } from "../card-cart";
 import { useCartContext } from "../../contexts/CartContext";
 
 export function DrawerComponent() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { cart } = useCartContext();
+  const { cart, clearCart } = useCartContext();
+  const [purchaseData, setPurchaseData] = useState({});
 
   const total = cart.reduce((sumTotal, product) => {
     sumTotal += product.price * product.amount;
@@ -35,6 +36,29 @@ export function DrawerComponent() {
     sumQuantity += product.amount;
     return sumQuantity;
   }, 0);
+
+  const transformCartData = () => {
+    const productList = cart.map((cartItem) => ({
+      id: cartItem.id,
+      name: cartItem.name,
+      price: cartItem.price,
+      amount: cartItem.amount,
+    }));
+
+    setPurchaseData({
+      productList,
+      totalPrice: total.toFixed(2),
+    });
+
+    const jsonString = JSON.stringify(purchaseData);
+    console.log(jsonString);
+    clearCart();
+  };
+
+  const handleFinishPurchase = () => {
+    transformCartData();
+    onClose();
+  };
 
   return (
     <>
@@ -117,6 +141,7 @@ export function DrawerComponent() {
               size='lg'
               backgroundColor={"#111111"}
               color='#ffffff'
+              onClick={handleFinishPurchase}
               _hover={{
                 backgroundColor: "#ffffff",
                 color: "#111111",

@@ -9,9 +9,11 @@ export interface UpdateProductAmount {
   productId: number;
   amount: number;
 }
+
 export interface CartContextProps {
   cart: Product[];
   addToCart: (productId: number) => void;
   removeFromCart: (productId: number) => void;
   updateProductAmount: ({ productId, amount }: UpdateProductAmount) => void;
+  clearCart: () => void;
 }
