@@ -31,10 +31,14 @@ export function DrawerComponent() {
     return sumTotal;
   }, 0);
 
+  const totalQuantity = cart.reduce((sumQuantity, product) => {
+    sumQuantity += product.amount;
+    return sumQuantity;
+  }, 0);
+
   return (
     <>
       <Flex>
-        {" "}
         <IconButton
           aria-label={""}
           variant='ghost'
@@ -56,7 +60,7 @@ export function DrawerComponent() {
             background='red'
             color='#ffff'
           >
-            {cart.length}
+            {totalQuantity}
           </Badge>
         )}
       </Flex>
