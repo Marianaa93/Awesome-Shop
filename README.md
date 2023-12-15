@@ -1,46 +1,141 @@
-# Getting Started with Create React App
+# Awesome Store
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Welcome to Awesome Store, your go-to online bookstore! This React application provides users with a delightful shopping experience for books, complete with features like search, filtering, and a shopping cart.
 
-## Available Scripts
 
-In the project directory, you can run:
+https://github.com/Marianaa93/awesomeShopCopy/assets/91208001/9b7c8cf2-10e0-4c1a-9b4d-ffe2441f9e1d
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Link to the website: https://awesome-shop-copy.vercel.app/
 
-### `npm test`
+## Getting Started
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+To get started with Awesome Store, follow these steps:
 
-### `npm run build`
+1. Clone the repository:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    ```bash
+    git clone https://github.com/your-username/awesome-store.git
+    ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. Navigate to the project directory:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+    ```bash
+    cd awesome-store
+    ```
 
-### `npm run eject`
+3. Install dependencies:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+    ```bash
+    npm install
+    ```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+4. Start the application:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+    ```bash
+    npm start
+    ```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Features
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 1. Search by Name
+
+Easily find your favorite books by searching for their names.
+
+### 2. Category Filtering
+
+Filter books by category to discover new and exciting reads in your preferred genre.
+
+### 3. Price Range Filtering
+
+Stay within your budget by filtering books based on price range.
+
+### 4. Shopping Cart
+
+Add books to your shopping cart and keep track of your purchases.
+
+### 5. Pagination
+
+Navigate through the extensive book collection using the convenient pagination feature.
+
+## Project Structure
+
+The project directory is organized as follows:
+
+- `src/`: Contains the application source code.
+  - `components/`: Reusable components.
+  - `pages/`: Application pages.
+  - `services/`: Configuration and logic for communicating with the API.
+  - ...
+
+## Technologies Used
+
+- **React**: Building the user interface.
+- **Chakra UI**: Styling and UI components.
+- ...
+
+## Main Components
+
+### 1. `Pagination`
+
+The `Pagination` component allows easy navigation between pages of book results.
+
+```jsx
+// components/pagination/pagination.tsx
+// ...
+
+export const Pagination: React.FC<PaginationProps> = ({
+  totalPages,
+  currentPage,
+  onPageChange,
+}) => {
+  // ... component implementation ...
+};
+```
+
+### 2. `Home`
+
+The `Home` component serves as the main page, displaying books, enabling filtering, and showcasing pagination.
+
+```jsx
+// pages/home.tsx
+// ...
+
+export function Home() {
+  // ... Home page implementation ...
+}
+```
+
+### 3. `Shopping Cart`
+
+The `Shopping Cart` component manages the user's selected books for purchase.
+
+```jsx
+// components/shopping-cart/shopping-cart.tsx
+// ...
+
+export const ShoppingCart: React.FC<ShoppingCartProps> = ({ cart, clearCart }) => {
+  // ... shopping cart implementation ...
+};
+```
+
+## How to Contribute
+
+If you'd like to contribute to Awesome Store, follow these steps:
+
+1. Fork the repository.
+2. Create a branch for your contribution: `git checkout -b my-contribution`
+3. Make the desired changes.
+4. Commit your changes: `git commit -m 'My contribution'`
+5. Push the branch: `git push origin my-contribution`
+6. Open a pull request.
+
+
+## Author
+
+Mariana Lima e Maia
+
+[Link to your GitHub profile](https://github.com/marianaa93)
