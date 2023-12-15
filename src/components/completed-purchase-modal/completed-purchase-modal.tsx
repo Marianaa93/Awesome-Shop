@@ -9,17 +9,22 @@ import {
   ModalFooter,
   Flex,
   Box,
+  ModalCloseButton,
 } from "@chakra-ui/react";
 import React from "react";
-import { ModalProps } from "./types";
-import { CheckIcon } from "@chakra-ui/icons";
+import { ModalProps, ProductData } from "./types";
 import { CheckCircle } from "@phosphor-icons/react";
+
+type CompletedPurchaseModalProps = ModalProps & {
+  productList: ProductData[];
+  totalPrice: string;
+};
 
 export default function CompletedPurchaseModal({
   onClose,
   productList,
   totalPrice,
-}: ModalProps & { productList: any[]; totalPrice: string }) {
+}: CompletedPurchaseModalProps) {
   return (
     <>
       <Modal
@@ -27,11 +32,15 @@ export default function CompletedPurchaseModal({
         onClose={onClose}
         size='lg'
         isOpen
-        closeOnOverlayClick
+        closeOnOverlayClick={false}
       >
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Your Summary</ModalHeader>
+          <ModalCloseButton
+            _hover={{ transform: "scale(1.5)" }}
+            _active={{ background: "none" }}
+          />
           <ModalBody>
             <Flex
               direction='column'
@@ -59,7 +68,7 @@ export default function CompletedPurchaseModal({
                   >
                     <Text>{product.name}</Text>
                     <Text>
-                      {product.amount}x - R$ {product.price}
+                      {product.amount}x R$ {product.price}
                     </Text>
                   </Flex>
                 ))}

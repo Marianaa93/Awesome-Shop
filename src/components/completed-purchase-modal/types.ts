@@ -5,12 +5,15 @@ export interface ModalProps {
 export interface CompletedPurchaseModalProps extends ModalProps {
   purchaseSummary: PurchaseData;
 }
+
+export type ProductData = {
+  id: number;
+  name: string;
+  price: number;
+  amount: number;
+};
+
 export interface PurchaseData {
-  productList: Array<{
-    id: number;
-    name: string;
-    price: number;
-    amount: number;
-  }>;
+  productList: ProductData[];
   totalPrice: string;
 }

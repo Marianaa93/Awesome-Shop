@@ -182,8 +182,8 @@ export function DrawerComponent() {
       </Drawer>
       {isCompletedPurchaseModalOpen && (
         <CompletedPurchaseModal
-          productList={purchaseData.productList}
-          totalPrice={purchaseData.totalPrice}
+          productList={purchaseData?.productList || []}
+          totalPrice={purchaseData?.totalPrice || ""}
           onClose={closeCompletedPurchaseModal}
         />
       )}
