@@ -110,7 +110,7 @@ export function Home() {
           justifyItems='center'
           placeContent='center'
           templateColumns={{
-            base: "repeat(2, 300px)",
+            base: "repeat(2, 1/3)",
             md: "repeat(4, 300px)",
           }}
           gap='96px'
