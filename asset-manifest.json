@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/awesome-shop/static/css/main.3793fe38.css",
-    "main.js": "/awesome-shop/static/js/main.858f1d17.js",
+    "main.js": "/awesome-shop/static/js/main.6461f056.js",
     "static/media/logo.png": "/awesome-shop/static/media/logo.4dd75d30d75a981bd904.png",
     "index.html": "/awesome-shop/index.html",
     "main.3793fe38.css.map": "/awesome-shop/static/css/main.3793fe38.css.map",
-    "main.858f1d17.js.map": "/awesome-shop/static/js/main.858f1d17.js.map"
+    "main.6461f056.js.map": "/awesome-shop/static/js/main.6461f056.js.map"
   },
   "entrypoints": [
     "static/css/main.3793fe38.css",
-    "static/js/main.858f1d17.js"
+    "static/js/main.6461f056.js"
   ]
 }
