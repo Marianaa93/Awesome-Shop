@@ -10,6 +10,7 @@ import {
   Stack,
   Badge,
   CardHeader,
+  useMediaQuery,
 } from "@chakra-ui/react";
 import { Product } from "../../types";
 import { useCartContext } from "../../contexts/CartContext";
@@ -17,6 +18,7 @@ import { useCartContext } from "../../contexts/CartContext";
 export const randomNumber = Math.floor(Math.random() * 1000);
 
 export function ProductCard({ name, id, category, price }: Product) {
+  const [isLargerThan767] = useMediaQuery("(min-width: 767px)");
   const { addToCart } = useCartContext();
 
   const getCategoryColor = (category: string) => {
@@ -42,7 +44,7 @@ export function ProductCard({ name, id, category, price }: Product) {
     <Card
       display='flex'
       maxW='300px'
-      w='300px'
+      w='400px'
       maxH='400px'
       boxShadow='xl'
       justifyContent='center'
@@ -78,20 +80,20 @@ export function ProductCard({ name, id, category, price }: Product) {
           borderRadius='md'
           overflow='hidden'
           position='relative'
-          ml='25%'
+          ml={isLargerThan767 ? "25%" : "35%"}
         >
           <Image
             src={`https://source.unsplash.com/800x600/?${encodeURIComponent(
               name
             )}&random=${randomNumber}`}
             alt={`${name}'s cover`}
-            w='120px'
-            h='140px'
+            w={isLargerThan767 ? "120px" : "66px"}
+            h={isLargerThan767 ? "140px" : "75px"}
             borderBottomRightRadius='1px'
             borderColor='#CDC5D9'
             objectFit='cover'
             position='absolute'
-            left='-3%'
+            left={isLargerThan767 ? "-3%" : "-1.5%"}
             boxShadow='md'
           />
 
@@ -99,7 +101,7 @@ export function ProductCard({ name, id, category, price }: Product) {
             position='absolute'
             top='0'
             left='0'
-            right='30px'
+            right={isLargerThan767 ? "30px" : "10px"}
             bottom='0'
             borderRadius='md'
             background='linear-gradient(rgba(0.2,0.2,0,0.2 ), rgba(0.1,0,0.1,0.2))'

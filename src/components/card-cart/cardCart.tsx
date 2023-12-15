@@ -5,8 +5,11 @@ import { useCartContext } from "../../contexts/CartContext";
 import { Product } from "../../types";
 import { UpdateProductAmount } from "../../contexts/CartContextProps";
 import { NumberInput } from "../../UI/number-input";
+import { useMediaQuery } from "@chakra-ui/react";
 
 export function CardCart({ name, price, id, amount }: Product) {
+  const [isLargerThan767] = useMediaQuery("(min-width: 767px)");
+
   const { removeFromCart, updateProductAmount } = useCartContext();
 
   function handleRemoveProduct(productId: number) {
@@ -39,13 +42,13 @@ export function CardCart({ name, price, id, amount }: Product) {
             name
           )}&random=${randomNumber}`}
           alt={`book's cover`}
-          w='70px'
+          w={isLargerThan767 ? "70px" : "50px"}
           h='95%'
           borderBottomRightRadius='1px'
           borderColor='#CDC5D9'
           objectFit='cover'
           position='absolute'
-          left='-2.5%'
+          left={isLargerThan767 ? "-2.5%" : "-4.5%"}
           boxShadow={"md"}
         />
 

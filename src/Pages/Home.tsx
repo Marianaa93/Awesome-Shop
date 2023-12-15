@@ -63,11 +63,12 @@ export function Home() {
           padding='10px'
           gap={2}
           border='0.5px solid #CDC5D9'
-          width='75%'
+          flexDirection={{ base: "column", md: "row" }}
+          width='100%'
           placeSelf='center'
         >
           <Input
-            flex='11'
+            flex={{ base: "1", md: "5" }}
             border='1px solid #CDC5D9'
             lineHeight='37px'
             textAlign='left'
@@ -76,7 +77,7 @@ export function Home() {
             onChange={(e) => setSearchTitle(e.target.value)}
           />
           <Select
-            flex='3'
+            flex={{ base: "1", md: "2" }}
             border='1px solid #CDC5D9'
             lineHeight='37px'
             textAlign='left'
@@ -90,7 +91,7 @@ export function Home() {
             <option value='science-fiction'>Science-Fiction</option>
           </Select>
           <Select
-            flex='3'
+            flex={{ base: "1", md: "2" }}
             border='1px solid #CDC5D9'
             lineHeight='37px'
             textAlign='left'
@@ -110,10 +111,12 @@ export function Home() {
           justifyItems='center'
           placeContent='center'
           templateColumns={{
-            base: "repeat(2, 1/3)",
-            md: "repeat(4, 300px)",
+            base: "repeat(1, 1fr)",
+            md: "repeat(2, 1fr)",
+            lg: "repeat(2, 1fr)",
+            xl: "repeat(4, 1fr)",
           }}
-          gap='96px'
+          gap={{ base: "8", md: "16px" }}
         >
           {products.map((product, index) => (
             <ProductCard
