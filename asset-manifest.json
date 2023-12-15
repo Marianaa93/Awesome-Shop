@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/Awesome-Shop/static/css/main.3793fe38.css",
+    "main.js": "/Awesome-Shop/static/js/main.f69585be.js",
+    "static/media/logo.png": "/Awesome-Shop/static/media/logo.4dd75d30d75a981bd904.png",
+    "index.html": "/Awesome-Shop/index.html",
+    "main.3793fe38.css.map": "/Awesome-Shop/static/css/main.3793fe38.css.map",
+    "main.f69585be.js.map": "/Awesome-Shop/static/js/main.f69585be.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3793fe38.css",
+    "static/js/main.f69585be.js"
+  ]
+}
