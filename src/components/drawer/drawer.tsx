@@ -20,11 +20,26 @@ import { ShoppingCart } from "@phosphor-icons/react";
 import React, { useState } from "react";
 import { CardCart } from "../card-cart";
 import { useCartContext } from "../../contexts/CartContext";
+import CompletedPurchaseModal from "../completed-purchase-modal/completed-purchase-modal";
+
+interface PurchaseData {
+  productList: Product[];
+  totalPrice: string;
+}
+
+interface Product {
+  id: number;
+  name: string;
+  price: number;
+  amount: number;
+}
 
 export function DrawerComponent() {
+  const [isCompletedPurchaseModalOpen, setCompletedPurchaseModalOpen] =
+    useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { cart, clearCart } = useCartContext();
-  const [purchaseData, setPurchaseData] = useState({});
+  const [purchaseData, setPurchaseData] = useState<PurchaseData>();
 
   const total = cart.reduce((sumTotal, product) => {
     sumTotal += product.price * product.amount;
@@ -50,11 +65,19 @@ export function DrawerComponent() {
 
     const jsonString = JSON.stringify({ productList, totalPrice });
     console.log(jsonString);
-    clearCart();
+  };
+  const openCompletedPurchaseModal = () => {
+    setCompletedPurchaseModalOpen(true);
+  };
+
+  const closeCompletedPurchaseModal = () => {
+    setCompletedPurchaseModalOpen(false);
   };
 
   const handleFinishPurchase = () => {
     transformCartData();
+    clearCart();
+    openCompletedPurchaseModal();
     onClose();
   };
 
@@ -157,6 +180,13 @@ export function DrawerComponent() {
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
+      {isCompletedPurchaseModalOpen && (
+        <CompletedPurchaseModal
+          productList={purchaseData.productList}
+          totalPrice={purchaseData.totalPrice}
+          onClose={closeCompletedPurchaseModal}
+        />
+      )}
     </>
   );
 }
